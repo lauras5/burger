@@ -1,12 +1,22 @@
 <div class="all">
-
-  <h1>Yum Yum Burgers</h1>
+  <div class="jumbotron" id="jumbo">
+    <h1>Yum Yum</h1>
+    <img src="./assets/img/kawaiiBurger.jpg" alt="burger image">
+    <h1>Burgers</h1>
+  </div>
 
   <div class="container">
     <div class="row">
       <div class="col-md">
-        {{!-- shows burgers yet to be devoured, clickable button --}} 
-        {{#each burgers}} {{#unless this.devoured}}
+        <h2>CLICK ON A BURGER TO DEVOUR IT!</h2>
+      </div>
+      <div class="col-md">
+        <h2>DEVOURED BURGERS</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md">
+        {{!-- shows burgers yet to be devoured, clickable button --}} {{#each burgers}} {{#unless this.devoured}}
         <div>
           <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
             <button type="submit" class='burgerND'>{{this.burger_name}}</button>
@@ -16,8 +26,7 @@
       </div>
 
       <div class="col-md">
-        {{!-- shows all burgers that have been devoured, not clickable --}} 
-        {{#each burgers}} {{#if this.devoured}}
+        {{!-- shows all burgers that have been devoured, not clickable --}} {{#each burgers}} {{#if this.devoured}}
         <div class='burgerD'>
           <div>
             {{this.burger_name}}
@@ -27,7 +36,7 @@
       </div>
     </div>
   </div>
-
+  <br>
   <h2>Add A Burger!</h2>
 
   {{!-- form for user to enter new burger --}}
@@ -39,4 +48,7 @@
       </form>
     </div>
   </div>
+  <br>
+  <br>
+  <footer>Enjoy! &copy; Laura Salcido 2018</footer>
 </div>

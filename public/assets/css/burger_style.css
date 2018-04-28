@@ -29,6 +29,7 @@ img {
 
 .burgerND:hover {
     background-color: #bb8030;
+    cursor: grab;
 }
 
 .burgerD {

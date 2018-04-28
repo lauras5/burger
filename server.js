@@ -2,11 +2,15 @@
 var express = require('express')
 var bodyparser = require('body-parser')
 var path = require('path')
+// used to override methods in form
+var methodOverride = require('method-override');
+
 
 var PORT = process.env.PORT || 3000
 
 var app = express()
 
+app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')))
 // app.use(express.static("public"))
 app.use(bodyparser.urlencoded({ extended: true }))

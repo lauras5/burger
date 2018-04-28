@@ -6,65 +6,51 @@ function printQuestionMarks(num) {
     for (var i = 0; i < num; i++) {
         arr.push("?");
     }
-
     return arr.toString();
 }
 
 function objToSql(ob) {
     var arr = [];
-
     for (var key in ob) {
         var value = ob[key];
-
         arr.push(key + " : " + value);
     }
-
     return arr.toString();
 }
 
 var orm = {
+    // Shows all the items in the database
     selectAll: function (tableInput, cb) {
         var queryString = "SELECT * FROM " + tableInput + ";";
-
+        // database query
         connection.query(queryString, function (e, r) {
             if (e) throw e;
             cb(r)
         });
     },
 
+    // Inserts and sets value for single table entry
     insertOne: function (table, cols, vals, cb) {
-        var queryString = "INSERT INTO " + table;
-
-        queryString += " (";
-        queryString += cols.toString();
-        queryString += ") ";
-        queryString += "VALUES (";
-        queryString += printQuestionMarks(vals.length);
-        queryString += ") ";
-
+        var queryString = "INSERT INTO " + table + "( " + cols.toString() + ") VALUES (" + printQuestionMarks(vals.length) + ") "
         // console.log(queryString)
 
-        connection.query(queryString, vals, function(e, r) {
+        // database query
+        connection.query(queryString, vals, function (e, r) {
             if (e) throw e;
             cb(r)
         });
     },
 
-    updateOne: function (table, objColVals, condition, cb) {
-        var queryString = "UPDATE " + table;
+    // Updates item that is clicked, to devoured
+    updateOne: function (table, objColVals, id, cb) {
 
-        queryString += " SET ";
-        queryString += objToSql(objColVals);
-        queryString += " WHERE ";
-        queryString += condition;
-
-        console.log(queryString);
-
-        connection.query(queryString, function (e, r) {
+        var q = 'UPDATE ' + table + ' SET ? WHERE id=?'
+        // console.log(queryString)
+        connection.query(q, [objColVals, id], function (e, r) {
             if (e) throw e;
             cb(r)
         });
     }
-}
+};
 
 module.exports = orm

@@ -1,42 +1,42 @@
+<div class="all">
 
-<h1>Yum Yum Burgers</h1>
+  <h1>Yum Yum Burgers</h1>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md">
-      {{#each burgers}} 
-      {{#unless this.devoured}}
-      <div>
-        <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
-          
-        <button type="submit" class='burgerND'> {{this.burger_name}}</button>
-        </form>
-      </div>
-      {{/unless}} 
-      {{/each}}
-    </div>
-
-    <div class="col-md">
-      {{#each burgers}} 
-      {{#if this.devoured}}
-      <div class='burgerD'>
+  <div class="container">
+    <div class="row">
+      <div class="col-md">
+        {{!-- shows burgers yet to be devoured, clickable button --}} 
+        {{#each burgers}} {{#unless this.devoured}}
         <div>
-          {{this.burger_name}}
+          <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
+            <button type="submit" class='burgerND'>{{this.burger_name}}</button>
+          </form>
         </div>
+        {{/unless}} {{/each}}
       </div>
-      {{/if}} 
-      {{/each}}
+
+      <div class="col-md">
+        {{!-- shows all burgers that have been devoured, not clickable --}} 
+        {{#each burgers}} {{#if this.devoured}}
+        <div class='burgerD'>
+          <div>
+            {{this.burger_name}}
+          </div>
+        </div>
+        {{/if}} {{/each}}
+      </div>
     </div>
   </div>
-</div>
 
-<h2>Add A Burger!</h2>
+  <h2>Add A Burger!</h2>
 
-<div class="row">
-  <div class="col-md">
-    <form action="/burgers" method="POST">
-      <input type="text" id="name" name="burger_name" placeholder="Enter Desired Burger!">
-      <button type="submit" class="addBurgerBTN">Add Burger</button>
-    </form>
+  {{!-- form for user to enter new burger --}}
+  <div class="row">
+    <div class="col-md">
+      <form action="/burgers" method="POST">
+        <input type="text" id="name" name="burger_name" placeholder="Enter Desired Burger!">
+        <button type="submit" class="burgerBTN">Add Burger</button>
+      </form>
+    </div>
   </div>
 </div>
